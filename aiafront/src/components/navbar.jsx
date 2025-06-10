@@ -16,7 +16,7 @@ const Navbar = () => {
 
       <button 
       style={{backgroundColor:'#273C5E', width: '162px', height: '39px'}} 
-      className="text-white rounded-full self-center" > Iniciar Sesión</button>
+      className="inter-fuente text-white rounded-full self-center" > Iniciar Sesión</button>
     </div>
   );
 };
