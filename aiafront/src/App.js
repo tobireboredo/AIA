@@ -5,7 +5,7 @@ function App() {
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
-  const threshold = 10; // píxeles mínimos para detectar cambio
+  const threshold = 17; 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,17 +13,14 @@ function App() {
 
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
-          // Si el scroll cambió menos que el threshold, no hacemos nada
           if (Math.abs(currentScrollY - lastScrollY.current) < threshold) {
             ticking.current = false;
             return;
           }
 
           if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-            // Scroll hacia abajo y más de 50px ocultar navbar
             setShowNavbar(false);
           } else if (currentScrollY < lastScrollY.current) {
-            // Scroll hacia arriba mostrar navbar
             setShowNavbar(true);
           }
 
