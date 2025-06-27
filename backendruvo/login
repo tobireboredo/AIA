@@ -1,0 +1,37 @@
+# app.py (Backend con Flask)
+import os
+from flask import Flask, redirect, request, session, url_for, jsonify
+from google_auth_oauthlib.flow import Flow
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+
+app = Flask(__name__)
+app.secret_key = 'tu_super_secreto_para_sesiones_flask' # ¡Cámbialo!
+
+# Configuración de OAuth 2.0
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1' # Solo para desarrollo en HTTP
+CLIENT_SECRETS_FILE = "client_secret.json" # El archivo que descargaste de Google Cloud
+SCOPES = [
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'https://www.googleapis.com/auth/userinfo.email',
+    'openid',
+    'https://www.googleapis.com/auth/gmail.readonly', # Para leer mails
+    'https://www.googleapis.com/auth/gmail.modify'   # Para modificar (crear carpetas, etc.)
+]
+
+@app.route('/login')
+def login():
+    flow = Flow.from_client_secrets_file(
+        CLIENT_SECRETS_FILE,
+        scopes=SCOPES,
+        redirect_uri=url_for('callback', _external=True)
+    )
+    # Genera la URL a la que el usuario será redirigido
+    authorization_url, state = flow.authorization_url(
+        access_type='offline',
+        include_granted_scopes='true'
+    )
+    # Guarda el 'state' en la sesión para proteger contra CSRF
+    session['state'] = state
+    return redirect(authorization_url)
+   
