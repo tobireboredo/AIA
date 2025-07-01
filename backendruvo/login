@@ -1,0 +1,29 @@
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+
+# RUTA al archivo JSON con las credenciales de tu cuenta de servicio
+SERVICE_ACCOUNT_FILE = 'ruta/a/tu/archivo.json'
+
+# Dirección de correo electrónico que querés "impersonar"
+USER_TO_IMPERSONATE = 'usuario@tudominio.com'  # Solo si tenés delegación activada
+
+# Alcances necesarios (por ejemplo, leer correos)
+SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+
+# Crear las credenciales con impersonación
+credentials = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE,
+    scopes=SCOPES,
+    subject=USER_TO_IMPERSONATE  # este parámetro es clave
+)
+
+# Construir el cliente de Gmail
+service = build('gmail', 'v1', credentials=credentials)
+
+# Hacer una prueba: obtener los labels del inbox
+results = service.users().labels().list(userId='me').execute()
+labels = results.get('labels', [])
+
+print('Labels encontrados:')
+for label in labels:
+    print(f"- {label['name']}")
