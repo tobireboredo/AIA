@@ -1,7 +1,23 @@
 {
+  "name": "backendbenja",
+  "version": "1.0.0",
+  "description": "Backend para la integración con Gemini API",
+  "main": "index.js",
   "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gemini",
+    "api",
+    "ia",
+    "node"
+  ],
+  "author": "Tu Nombre",
+  "license": "ISC",
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "dotenv": "^16.5.0"
+    "@google/generative-ai": "^0.12.0",
+    "dotenv": "^16.4.5"
   }
 }
