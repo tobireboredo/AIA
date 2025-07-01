@@ -1,29 +1,31 @@
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+import pickle
+import os
 
-# RUTA al archivo JSON con las credenciales de tu cuenta de servicio
-SERVICE_ACCOUNT_FILE = 'ruta/a/tu/archivo.json'
-
-# Dirección de correo electrónico que querés "impersonar"
-USER_TO_IMPERSONATE = 'usuario@tudominio.com'  # Solo si tenés delegación activada
-
-# Alcances necesarios (por ejemplo, leer correos)
+# Permisos mínimos necesarios para Gmail
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
-# Crear las credenciales con impersonación
-credentials = service_account.Credentials.from_service_account_file(
-    SERVICE_ACCOUNT_FILE,
-    scopes=SCOPES,
-    subject=USER_TO_IMPERSONATE  # este parámetro es clave
-)
+def login_gmail():
+    creds = None
 
-# Construir el cliente de Gmail
-service = build('gmail', 'v1', credentials=credentials)
+    # Si ya existe un token guardado, usarlo
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
 
-# Hacer una prueba: obtener los labels del inbox
-results = service.users().labels().list(userId='me').execute()
-labels = results.get('labels', [])
+    # Si no hay credenciales válidas, iniciar flujo de login
+    if not creds or not creds.valid:
+        flow = InstalledAppFlow.from_client_secrets_file(
+            'credentials.json', SCOPES)
+        creds = flow.run_local_server(port=0)
 
-print('Labels encontrados:')
-for label in labels:
-    print(f"- {label['name']}")
+        # Guardar token para próximas sesiones
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+
+    print("✅ Login exitoso. Token generado.")
+    return creds
+
+# Ejecutar login
+if __name__ == '__main__':
+    login_gmail()
