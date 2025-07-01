@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
+import Hero from './components/Hero'
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -38,17 +39,9 @@ function App() {
   }, []);
 
   return (
-    <div className="pt-20 p-6 min-h-screen bg-[#FFFFFF]">
+    <div className="p-6 min-h-screen bg-[#FFFFFF]">
       <Navbar visible={showNavbar} />
-      <div className="max-w-3xl mx-auto">
-        <p className="text-gray-800 text-lg leading-7">
-          {Array(100)
-            .fill(
-              'Este es un párrafo de ejemplo que se repite para simular contenido desplazable. '
-            )
-            .join('')}
-        </p>
-      </div>
+      <Hero />
     </div>
   );
 }

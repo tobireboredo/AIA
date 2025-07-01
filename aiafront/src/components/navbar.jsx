@@ -10,7 +10,7 @@ const Navbar = ({ visible }) => {
   }
   return (
     <div
-      className={`fixed w-full top-0 z-50 transition-transform duration-300 bg-white ${
+      className={`fixed w-full top-0 z-50 transition-transform duration-300 ${
         visible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
@@ -27,7 +27,7 @@ const Navbar = ({ visible }) => {
         <button
           onClick={()=> window.location.href = 'http://localhost:5000/auth/google'}
           style={{ width: '162px', height: '39px' }}
-          className="inter-fuente text-white bg-[#273C5E] rounded-full mr-8"
+          className="inter-fuente text-white bg-[#273D5E] rounded-full mr-8"
         >
           Iniciar Sesión
         </button>
