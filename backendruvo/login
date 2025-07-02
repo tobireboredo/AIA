@@ -1,4 +1,4 @@
-from google_auth_oauthlib.flow import InstalledAppFlow
+from google_auth_oauthlib.flow import Flow
 import pickle
 import os
 
@@ -15,16 +15,22 @@ def login_gmail():
 
     # Si no hay credenciales válidas, iniciar flujo de login
     if not creds or not creds.valid:
-        flow = InstalledAppFlow.from_client_secrets_file(
-            'credentials.json', SCOPES)
-        creds = flow.run_local_server(port=0)
+        flow = Flow.from_client_secrets_file(
+            'credentials.json',
+            scopes=SCOPES,
+            redirect_uri='http://127.0.0.1:5000/google_login/google/authorized'  # Debe coincidir con el redirect_uri registrado en Google Cloud
+        )
+        auth_url, state = flow.authorization_url(
+            access_type='offline',
+            include_granted_scopes='true'
+        )
 
-        # Guardar token para próximas sesiones
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
+        print(f"🔗 Redirige al usuario a esta URL para iniciar sesión: {auth_url}")
+        # A partir de acá, deberías redirigir al usuario a `auth_url` desde el frontend
 
-    print("✅ Login exitoso. Token generado.")
-    return creds
+        # IMPORTANTE: No se puede guardar el token todavía, eso se hace después del callback
+
+    return
 
 # Ejecutar login
 if __name__ == '__main__':
