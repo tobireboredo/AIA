@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero'
+import ChatbotMain from './components/ChatbotMain';
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -39,10 +41,16 @@ function App() {
   }, []);
 
   return (
-    <div className="p-6 min-h-screen bg-[#FFFFFF]">
-      <Navbar visible={showNavbar} />
-      <Hero />
-    </div>
+    <Router>
+      <div className="p-6 min-h-screen bg-[#FFFFFF]">
+        <Navbar visible={showNavbar} />
+        <Routes>
+          <Route path="/" element={<Navigate to="/inicio" replace />} />
+          <Route path="/inicio" element={<Hero />} />
+          <Route path="/chatbot" element={<ChatbotMain />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

@@ -10,14 +10,16 @@ const Navbar = ({ visible }) => {
   }
   return (
     <div
-      className={`fixed w-full top-0 z-50 transition-transform duration-300 ${
+      className={`fixed w-full top-0 z-50 transition-transform duration-300 bg-white ${
         visible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
       <div className="flex items-center justify-between px-4 py-4">
         {}
         <div className="flex items-center gap-12">
-          <img src={logo} alt="aialogo"/>
+        <button onClick={handleClick} className="" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
+          <img src={logo} alt="logo" />
+          </button>
           <button onClick={handleClick} className="mt-4" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
           <img src={activo? imgdirectorio2 : imgdirectorio} alt="imgdirectorio" />
           </button>
