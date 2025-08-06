@@ -70,7 +70,6 @@ const Layout = ({ showNavbar }) => {
             <div className="flex min-h-screen">
               <SidebarChatbot />
               <div className="flex-1 flex flex-col">
-                <NavbarChatbot />
                 <main className="p-4">
                   <ChatbotMain />
                 </main>
