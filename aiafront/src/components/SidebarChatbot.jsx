@@ -1,29 +1,39 @@
 import React, { useState } from "react";
 import imgdirectorio from '../png/imgdirectorio.png';
+import logo from '../png/AIA_logo.png'; // Asegurate que la ruta sea correcta
 
 const SidebarChatbot = () => {
   const [expanded, setExpanded] = useState(true);
 
   return (
     <div
-      className={`fixed top-0 left-0 bg-white text-black flex flex-col justify-between
+      className={`fixed top-0 left-0 text-black flex flex-col justify-between
         transition-all duration-300 ease-in-out
         ${expanded ? "w-64" : "w-16"}
         min-h-screen
         shadow
       `}
+      style={{
+        backgroundColor: 'white',
+        backgroundImage: expanded ? 'linear-gradient(to right, #EFEFEF, transparent)' : 'none',
+      }}
     >
-      {/* Contenedor superior para botones */}
       <div
-        className={`
-          flex
-          ${expanded ? 'justify-end pr-4' : 'flex-col items-center space-y-4'}
-          items-center
-          pt-4
-        `}
-        style={{ minHeight: '3rem' }}
+        className={`flex items-center pt-4 px-4 ${
+          expanded ? 'justify-between' : 'flex-col items-center space-y-4'
+        }`}
+        style={{ minHeight: '3rem', position: 'relative' }}
       >
-        {/* Toggle button siempre */}
+        {/* Logo solo cuando está expandida, a la izquierda */}
+        {expanded && (
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-10 h-10 object-contain"
+          />
+        )}
+
+        {/* Botón toggle */}
         <button
           onClick={() => setExpanded(!expanded)}
           className="focus:outline-none"
@@ -61,9 +71,7 @@ const SidebarChatbot = () => {
             <li className="mb-4 cursor-pointer hover:bg-gray-700 p-2 rounded text-black">Chat 1</li>
             <li className="mb-4 cursor-pointer hover:bg-gray-700 p-2 rounded text-black">Chat 2</li>
           </ul>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </nav>
     </div>
   );
