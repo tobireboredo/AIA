@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import NavbarChatbot from './components/NavbarChatbot'; // <-- nueva navbar
+import NavbarChatbot from './components/NavbarChatbot';
 import Hero from './components/Hero';
 import ChatbotMain from './components/ChatbotMain';
 import SidebarChatbot from './components/SidebarChatbot';
@@ -54,6 +54,9 @@ const Layout = ({ showNavbar }) => {
   const location = useLocation();
   const isChatbot = location.pathname === '/chatbot';
 
+  // 👇 definimos el estado para el ancho de la sidebar
+  const [sidebarWidth, setSidebarWidth] = useState(256);
+
   return (
     <>
       {isChatbot
@@ -67,16 +70,12 @@ const Layout = ({ showNavbar }) => {
         <Route
           path="/chatbot"
           element={
-            <div className="flex min-h-screen">
-              <SidebarChatbot />
-              <div className="flex-1 flex flex-col">
-                <main className="p-4">
-                  <ChatbotMain />
-                </main>
-              </div>
+            <div className="min-h-screen">
+              <SidebarChatbot onWidthChange={setSidebarWidth} />
+              <ChatbotMain sidebarWidth={sidebarWidth} />
             </div>
-  }
-/>
+          }
+        />
       </Routes>
     </>
   );
