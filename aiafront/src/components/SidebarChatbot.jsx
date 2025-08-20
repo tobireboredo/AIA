@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; 
 import imgdirectorio from '../png/imgdirectorio.png';
 import logo from '../png/AIA_logo.png';
 
@@ -31,7 +32,9 @@ const SidebarChatbot = ({ onWidthChange }) => {
         style={{ minHeight: "3rem", position: "relative" }}
       >
         {expanded && (
+          <Link to="/inicio">
           <img src={logo} alt="Logo" className="w-10 h-10 object-contain" />
+          </Link>
         )}
 
         <button
