@@ -3,6 +3,8 @@ import logo from '../png/AIA_logo.png';
 import imgdirectorio from '../png/imgdirectorio.png';
 import imgdirectorio2 from '../png/imgdirectorio2.png';
 
+const apiUrl = process.env.AIA_URL;
+
 const Navbar = ({ visible }) => {
   const [activo, setActivo] = useState(false);
   const handleClick = () => {
@@ -27,7 +29,7 @@ const Navbar = ({ visible }) => {
 
         {}
         <button
-          onClick={()=> window.location.href = 'http://localhost:5000/auth/google'}
+          onClick={()=> window.location.href = `${apiUrl}/login/auth`}
           style={{ width: '162px', height: '39px' }}
           className="inter-fuente text-white bg-[#273D5E] rounded-full mr-8"
         >
