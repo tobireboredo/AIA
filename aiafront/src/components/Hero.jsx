@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from "../png/AIAGRANDE.png";
+import fotoizquierda from "../png/fotoizquierda.png";
+import fotoderecha from "../png/fotoderecha.png";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -33,11 +35,31 @@ const Hero = () => {
 
         <h2 className="text-2xl font-bold mb-2 mt-8 font-inter text-center">¿A quién está orientado AI Assistant?</h2>
 
-        {/* Rectángulo azul con bordes redondeados */}
         <div className="bg-[#273D5E] text-white p-6 rounded-lg">
           <p className="font-inter">
             AI Assistant está orientado a empleados que deben gestionar un alto volumen de correos electrónicos en su jornada laboral, especialmente aquellos que se interactúan con múltiples equipos de trabajo. Resulta particularmente útil para profesionales que requieren llevar a cabo varios proyectos de forma simultánea que colaboran con una misma empresa, ya que les permite mantener una comunicación más organizada y eficiente.
           </p>
+        </div>
+      </div>
+
+      <div className="bg-[#273D5E] w-full h-[500px] mt-16 rounded-lg flex flex-col md:flex-row justify-around items-center h-[500px] px-8 gap-8">
+        {/* Primer rectángulo blanco */}
+        <div className="bg-white h-[300px] rounded-lg shadow-lg p-6 flex-1 max-w-xl text-gray-800">
+
+          <div className="absolute -top-8 -left-8 w-20 h-20 rounded-full overflow-hidden border-2 border-[#273D5E]">
+            <img src={fotoizquierda} alt="Foto izquierda" className="w-full h-full object-cover" />
+          </div>
+
+        <button className="text-2xl font-bold mb-4 mt-4">Leer reseña completa</button>
+          <p className="text-xl mt-12">
+          “Desde que implementamos esta solucion, redujimos un 40% de tiempo que invertiamos en tareas manuales. Ahora podemos enforcarnos en lo estrategico”          </p>
+        </div>
+
+        {/* Segundo rectángulo blanco */}
+        <div className="bg-white h-[300px] rounded-lg shadow-lg p-6 flex-1 max-w-xl text-gray-800">
+          <p className="text-xl mt-4">
+          “Lo que mas nos impresiono  fue la interfaz intuitiva y la capacidad de adaptacion. No tuvimos que cambiar demasiado nuestros procesos existentes”          </p>
+          <button className="text-2xl font-bold mb-4 mt-12">Leer reseña completa</button>
         </div>
       </div>
     </div>
