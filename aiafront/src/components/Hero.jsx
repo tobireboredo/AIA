@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import logo from "../png/AIAGRANDE.png";
 import fotoizquierda from "../png/fotoizquierda.png";
 import fotoderecha from "../png/fotoderecha.png";
+import logoGoogle from "../png/logoGoogle.png";
+import logoGmail from "../png/logoGmail.png";
+import iconoCarpeta from "../png/iconoCarpeta.png";
+import iconoTexto from "../png/iconoTexto.png";
+import iconoInfo from "../png/iconoInfo.png";
+import Footer from './Footer';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -43,8 +49,7 @@ const Hero = () => {
       </div>
 
       <div className="bg-[#273D5E] w-full h-[500px] mt-16 rounded-lg flex flex-col md:flex-row justify-around items-center h-[500px] px-8 gap-8">
-        {/* Primer rectángulo blanco */}
-        <div className="bg-white h-[300px] rounded-lg shadow-lg p-6 flex-1 max-w-xl text-gray-800">
+        <div className="bg-white h-[300px] rounded-lg shadow-lg p-6 flex-1 max-w-xl text-gray-800 relative">
 
           <div className="absolute -top-8 -left-8 w-20 h-20 rounded-full overflow-hidden border-2 border-[#273D5E]">
             <img src={fotoizquierda} alt="Foto izquierda" className="w-full h-full object-cover" />
@@ -55,12 +60,59 @@ const Hero = () => {
           “Desde que implementamos esta solucion, redujimos un 40% de tiempo que invertiamos en tareas manuales. Ahora podemos enforcarnos en lo estrategico”          </p>
         </div>
 
-        {/* Segundo rectángulo blanco */}
-        <div className="bg-white h-[300px] rounded-lg shadow-lg p-6 flex-1 max-w-xl text-gray-800">
+        <div className="bg-white h-[300px] rounded-lg shadow-lg p-6 flex-1 max-w-xl text-gray-800 relative">
+        
+        <div className="absolute -bottom-8 -right-8 w-20 h-20 rounded-full overflow-hidden border-2 border-[#273D5E]">
+            <img src={fotoderecha} alt="Foto derecha" className="w-full h-full object-cover" />
+        </div>
           <p className="text-xl mt-4">
           “Lo que mas nos impresiono  fue la interfaz intuitiva y la capacidad de adaptacion. No tuvimos que cambiar demasiado nuestros procesos existentes”          </p>
           <button className="text-2xl font-bold mb-4 mt-12">Leer reseña completa</button>
         </div>
+      </div>
+
+      <h2 className="text-center text-2xl font-bold mb-8 mt-24">¿Cómo funciona AI Assistant?</h2>
+      
+      <div className="flex flex-col md:flex-row gap-8 items-center mt-4">
+        <div className="md:w-1/2 text-gray-700 text-justify inter-fuente">
+          <p className="mb-6">
+            AI Assistant funciona mediante un sistema de inteligencia artificial que se conecta de forma segura con la cuenta de Gmail del usuario a través de los servicios de Google. Una vez establecida la conexión, la IA analiza los correos electrónicos recibidos y, utilizando distintos prompts, los clasifica automáticamente según su contenido.
+          </p>
+          <p className='mt-16'>
+            Además, permite al usuario visualizar y gestionar sus correos directamente desde nuestra plataforma, de manera organizada, rápida e intuitiva.
+          </p>
+        </div>
+
+        <div className="md:w-1/2 flex flex-col items-center gap-12">
+          <img src={logoGoogle} alt="Logo Google" className="w-auto h-auto" />
+          <img src={logoGmail} alt="Logo Gmail" className="w-auto h-auto" />
+        </div>
+      </div>
+
+      <h2 className="text-center text-2xl font-bold mb-8 mt-24">¿Que funciones va a cumplir AI Assistant?</h2>
+     
+      <div className="flex items-center justify-between gap-8 mt-16">
+        <p className="flex-1 font-bold text-gray-900 text-left max-w-[450px]">
+          AI Assistant analiza información la de los mails, y ayuda a buscar esta información mediante un chatbot.
+        </p>
+        <img src={iconoInfo} alt="Icono información" className="w-16 h-16 object-contain" />
+      </div>
+
+      <div className="flex items-center justify-between gap-8 mt-16">
+        <p className="flex-1 font-bold text-gray-900 text-left max-w-[450px]">
+          Al analizar los mails, AI Assistant brinda la información de estos y también ayuda con la redacción de los mails.
+        </p>
+        <img src={iconoTexto} alt="Icono lista" className="w-16 h-16 object-contain" />
+      </div>
+
+      <div className="flex items-center justify-between gap-8 mt-16">
+        <p className="flex-1 font-bold text-gray-900 text-left max-w-[450px]">
+          Al iniciar sesión lo primero que se pide es crear carpetas donde se van a seccionar los mails, donde se van a poder acceder a estos desde la página web.
+        </p>
+        <img src={iconoCarpeta} alt="Icono carpeta" className="w-16 h-16 object-contain" />
+      </div>
+      <div className="w-full h-full mt-16">
+        <Footer />
       </div>
     </div>
   );

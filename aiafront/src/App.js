@@ -5,6 +5,7 @@ import NavbarChatbot from './components/NavbarChatbot';
 import Hero from './components/Hero';
 import ChatbotMain from './components/ChatbotMain';
 import SidebarChatbot from './components/SidebarChatbot';
+import Footer from './components/Footer';
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(true);
