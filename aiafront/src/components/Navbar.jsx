@@ -10,6 +10,7 @@ const Navbar = ({ visible }) => {
   const handleClick = () => {
     setActivo(!activo);
   }
+  
   return (
     <div
       className={`fixed w-full top-0 z-50 transition-transform duration-300 bg-white ${
@@ -29,7 +30,7 @@ const Navbar = ({ visible }) => {
 
         {}
         <button
-          onClick={()=> window.location.href = `${apiUrl}/login/auth`}
+          onClick={()=> window.location.href = `/login/auth`}
           style={{ width: '162px', height: '39px' }}
           className="inter-fuente text-white bg-[#273D5E] rounded-full mr-8"
         >

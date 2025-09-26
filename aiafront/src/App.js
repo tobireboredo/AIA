@@ -1,17 +1,28 @@
+// App.js
 import React, { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import NavbarChatbot from './components/NavbarChatbot';
 import Hero from './components/Hero';
 import ChatbotMain from './components/ChatbotMain';
 import SidebarChatbot from './components/SidebarChatbot';
-import Footer from './components/Footer';
+import Login from './components/Login';
 
 function App() {
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
   const threshold = 17;
+  const location = useLocation(); // ✅ Se movió aquí porque ya no hay Layout separado
+  const navigate = useNavigate(); // ✅ Ya funciona porque App está dentro de <Router> (desde index.js)
+  useEffect(() => {
+    // Oculta navbar solo en /login/auth
+    if (location.pathname === '/login/auth') {
+      setShowNavbar(false);
+    } else {
+      setShowNavbar(true);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,24 +53,18 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
-    <Router>
-      <div className="p-6 min-h-screen bg-[#FFFFFF]">
-        <Layout showNavbar={showNavbar} />
-      </div>
-    </Router>
-  );
-}
+  // ✅ Al hacer clic en login, ocultamos la navbar y navegamos a /login/auth
+  const handleLoginClick = () => {
+    setShowNavbar(false);
+    navigate('/login/auth');
+  };
 
-const Layout = ({ showNavbar }) => {
-  const location = useLocation();
-  const isChatbot = location.pathname === '/chatbot';
-
-  // 👇 definimos el estado para el ancho de la sidebar
+  const isChatbot = location.pathname === '/chatbot'; // ✅ Se usa aquí en vez de pasar a Layout
   const [sidebarWidth, setSidebarWidth] = useState(256);
 
   return (
-    <>
+    <div className="p-6 min-h-screen bg-[#FFFFFF]">
+      {/* ✅ Navbar condicional según la ruta */}
       {isChatbot
         ? <NavbarChatbot visible={showNavbar} />
         : <Navbar visible={showNavbar} />
@@ -77,9 +82,11 @@ const Layout = ({ showNavbar }) => {
             </div>
           }
         />
+        <Route path="/login/auth" element={<Login />} setShowNavbar useState={false}/>
       </Routes>
-    </>
+    </div>
   );
-};
+}
 
 export default App;
+ 
